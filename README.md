@@ -5,7 +5,7 @@ This simple script creates a repository and seeds it with our commonly-used labe
 ## Usage
 
 1. Create a new GitHub access token at https://github.com/settings/tokens
-2. `export GITHUB_ACCESS_TOKEN='asdf1234'
+2. `export GITHUB_ACCESS_TOKEN='asdf1234'`
 3. `bundle install`
 4. `./seed-repo deis/foo`
 5. Configure a new Slack integration for the repo at https://railtie.slack.com/apps/manage/A0F7YS2SX-github
