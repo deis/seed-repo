@@ -1,0 +1,84 @@
+#!/usr/bin/env ruby
+
+require 'octokit'
+
+org_repo = ARGV[0]
+
+org = org_repo.split('/').first
+repo = org_repo.split('/').last
+
+if org_repo.nil?
+  raise RuntimeError, 'Specify the organization/repository as the first argument'
+end
+
+LABELS = [
+  {:label => 'awaiting review', :color => 'e11d21'},
+  {:label => 'bug', :color => 'fc2929'},
+  {:label => 'docs', :color => '5319e7'},
+  {:label => 'duplicate', :color => 'cccccc'},
+  {:label => 'easy fix', :color => 'bfe5bf'},
+  {:label => 'enhancement', :color => '84b6eb'},
+  {:label => 'help wanted', :color => '009800'},
+  {:label => 'in progress', :color => 'ededed'},
+  {:label => 'LGTM1', :color => '009800'},
+  {:label => 'LGTM2', :color => 'bfe5bf'},
+  {:label => 'needs docs', :color => '5319e7'},
+  {:label => 'needs manual testing', :color => 'fbca04'},
+  {:label => 'needs rebase', :color => 'f7c6c7'},
+  {:label => 'needs tests', :color => '006b75'},
+  {:label => 'proposal', :color => '0052cc'},
+  {:label => 'question', :color => 'cc317c'},
+  {:label => 'security', :color => 'eb6420'},
+  {:label => 'showstopper', :color => 'e11d21'},
+  {:label => 'wontfix', :color => 'ffffff'},
+]
+
+MILESTONES = [
+  'v2.0-beta1',
+  'v2.0'
+]
+
+# Careful! The following teams will be given admin privileges for the repo.
+TEAMS = [
+  '1539687', # bots
+  '1295916', # contributing-maintainers
+  '1539665', # core-maintainers
+]
+
+client = Octokit::Client.new(:access_token => ENV['GITHUB_ACCESS_TOKEN'])
+
+if client.repository?(org_repo)
+  puts "Repository '#{org_repo}' exists. Skipping creation..."
+else
+  puts "Creating repository '#{org_repo}'..."
+  client.create_repository(repo, {:organization => org})
+end
+
+LABELS.each do |l|
+  begin
+    client.label(org_repo, l[:label])
+  rescue Octokit::NotFound
+    puts "Creating label '#{l[:label]}'..."
+    client.add_label(org_repo, l[:label], l[:color])
+  else
+    puts "Label '#{l[:label]}' exists. Skipping creation..."
+  end
+end
+
+MILESTONES.each do |m|
+  begin
+    client.create_milestone(org_repo, m)
+  rescue
+    puts "Milestone '#{m}' exists. Skipping creation..."
+  else
+    puts "Creating milestone '#{m}'..."
+  end
+end
+
+# User must be an owner of an org to add the repository to teams
+puts "Attempting to give teams admin access to the repository."
+puts "This will fail if you aren't an owner on the org."
+TEAMS.each do |t|
+  puts "Adding #{org_repo} to team #{t}..."
+  client.add_team_repository(t, org_repo, {:permission => "admin"})
+end
