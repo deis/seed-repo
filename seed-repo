@@ -75,9 +75,6 @@ MILESTONES.each do |m|
   end
 end
 
-# User must be an owner of an org to add the repository to teams
-puts "Attempting to give teams admin access to the repository."
-puts "This will fail if you aren't an owner on the org."
 TEAMS.each do |t|
   puts "Adding #{org_repo} to team #{t}..."
   client.add_team_repository(t, org_repo, {:permission => "admin"})
