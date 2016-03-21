@@ -4,12 +4,12 @@ require 'octokit'
 
 org_repo = ARGV[0]
 
-org = org_repo.split('/').first
-repo = org_repo.split('/').last
-
 if org_repo.nil?
   raise RuntimeError, 'Specify the organization/repository as the first argument'
 end
+
+org = org_repo.split('/').first
+repo = org_repo.split('/').last
 
 LABELS = [
   {:label => 'awaiting review', :color => 'e11d21'},
