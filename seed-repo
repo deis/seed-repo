@@ -27,6 +27,7 @@ LABELS = [
   {:label => 'needs rebase', :color => 'f7c6c7'},
   {:label => 'needs tests', :color => '006b75'},
   {:label => 'proposal', :color => '0052cc'},
+  {:label => 'refactor', :color => 'E31919'},
   {:label => 'question', :color => 'cc317c'},
   {:label => 'security', :color => 'eb6420'},
   {:label => 'showstopper', :color => 'e11d21'},
