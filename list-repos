@@ -1,0 +1,69 @@
+#!/usr/bin/env ruby
+
+require "octokit"
+require "optparse"
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: list-repos [options]"
+
+  opts.on("-x", "--e[x]cludes", "Print excluded repos only") do |x|
+    options[:excludes] = true
+  end
+end.parse!
+
+if ENV["GITHUB_ACCESS_TOKEN"] == ""
+  raise RuntimeError, "Provide your GitHub token via GITHUB_ACCESS_TOKEN"
+end
+
+Octokit.auto_paginate = true
+client = Octokit::Client.new(access_token: ENV["GITHUB_ACCESS_TOKEN"])
+repos = client.org_repos(ENV["GITHUB_ORG"] || "deis")
+
+REJECT_MATCHES = [
+  Regexp.new("^confd$"),
+  Regexp.new("^deis$"),
+  Regexp.new("^deis\.io$"),
+  Regexp.new("^django-fsm$"),
+  Regexp.new("^django-polls$"),
+  Regexp.new("^docker-go-dev$"),
+  Regexp.new("^docker-go-test$"),
+  Regexp.new("^docker-python-dev$"),
+  Regexp.new("^docker-registry$"),
+  Regexp.new("^etcd$"),
+  Regexp.new("^example"),
+  Regexp.new("^helloworld$"),
+  Regexp.new("^helm-dm$"),
+  Regexp.new("^informant$"),
+  Regexp.new("^makeself$"),
+  Regexp.new("^memkv$"),
+  Regexp.new("^minio-src$"),
+  Regexp.new("^minio-sync$"),
+  Regexp.new("^mortitian$"),
+  Regexp.new("^nginxpusher$"),
+  Regexp.new("^pkg$"),
+  Regexp.new("^presentation-template$"),
+  Regexp.new("^prototype-repo$"),
+  Regexp.new("^redis-cluster$"),
+  Regexp.new("^riak$"),
+  Regexp.new("^riemann$"),
+  Regexp.new("^rigger$"),
+  Regexp.new("^seed-repo$"),
+  Regexp.new("^swarm$"),
+  Regexp.new("^syslog-parser"),
+  Regexp.new("^template-project$"),
+  Regexp.new("^tips-n-tricks$"),
+  Regexp.new("^training$"),
+  Regexp.new("^update-watcher$"),
+  Regexp.new("^wal-e$"),
+]
+
+rejected, selected = repos.partition do |repo|
+  REJECT_MATCHES.any? { |r| r.match repo.name }
+end
+
+if options[:excludes]
+  puts rejected.map(&:full_name).sort
+else
+  puts selected.map(&:full_name).sort
+end
