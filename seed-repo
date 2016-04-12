@@ -54,7 +54,7 @@ MILESTONES = {
   },
   "v2.0-rc1" => {
     state: "open",
-    due_on: Time.parse("May 5, 2016"),
+    due_on: Time.parse("May 25, 2016"),
   },
   "v2.0" => {
     state: "open",
