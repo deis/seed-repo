@@ -43,7 +43,6 @@ REJECT_MATCHES = [
   Regexp.new("^nginxpusher$"),
   Regexp.new("^pkg$"),
   Regexp.new("^presentation-template$"),
-  Regexp.new("^prototype-repo$"),
   Regexp.new("^redis-cluster$"),
   Regexp.new("^riak$"),
   Regexp.new("^riemann$"),
@@ -55,7 +54,6 @@ REJECT_MATCHES = [
   Regexp.new("^tips-n-tricks$"),
   Regexp.new("^training$"),
   Regexp.new("^update-watcher$"),
-  Regexp.new("^wal-e$"),
 ]
 
 rejected, selected = repos.partition do |repo|
