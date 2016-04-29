@@ -37,7 +37,7 @@ LABELS = [
 
 MILESTONES = {
   "v2.0-beta1" => {
-    state: "open",
+    state: "closed",
     due_on: Time.parse("March 25, 2016"),
   },
   "v2.0-beta2" => {
