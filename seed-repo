@@ -32,6 +32,7 @@ LABELS = [
   {:label => 'question', :color => 'cc317c'},
   {:label => 'security', :color => 'eb6420'},
   {:label => 'showstopper', :color => 'e11d21'},
+  {:label => 'waiting for ci', :color => '009C36'},
   {:label => 'wontfix', :color => 'ffffff'},
 ]
 
