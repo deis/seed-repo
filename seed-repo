@@ -36,30 +36,35 @@ LABELS = [
   {:label => 'wontfix', :color => 'ffffff'},
 ]
 
+# Specify a concrete timezone so dates parse as expected and
+# send dates to GitHub in UTC so we don't get flip/flops for
+# milestone dates depending on who happend to `seed-repo` last.
+ENV["TZ"] = "America/Denver"
+
 MILESTONES = {
   "v2.0-beta1" => {
     state: "closed",
-    due_on: Time.parse("March 25, 2016"),
+    due_on: Time.parse("March 25, 2016").utc,
   },
   "v2.0-beta2" => {
     state: "closed",
-    due_on: Time.parse("April 13, 2016"),
+    due_on: Time.parse("April 13, 2016").utc,
   },
   "v2.0-beta3" => {
     state: "closed",
-    due_on: Time.parse("April 27, 2016"),
+    due_on: Time.parse("April 27, 2016").utc,
   },
   "v2.0-beta4" => {
     state: "open",
-    due_on: Time.parse("May 11, 2016"),
+    due_on: Time.parse("May 11, 2016").utc,
   },
   "v2.0-rc1" => {
     state: "open",
-    due_on: Time.parse("May 25, 2016"),
+    due_on: Time.parse("May 25, 2016").utc,
   },
   "v2.0" => {
     state: "open",
-    due_on: Time.parse("June 8, 2016"),
+    due_on: Time.parse("June 8, 2016").utc,
   },
 }
 
