@@ -18,6 +18,7 @@ LABELS = [
   {:label => 'duplicate', :color => 'cccccc'},
   {:label => 'easy fix', :color => 'bfe5bf'},
   {:label => 'enhancement', :color => '84b6eb'},
+  {:label => 'flaky test', :color => 'A00CE8'},
   {:label => 'help wanted', :color => '009800'},
   {:label => 'in progress', :color => 'ededed'},
   {:label => 'LGTM1', :color => '009800'},
