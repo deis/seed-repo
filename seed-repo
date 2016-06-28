@@ -80,6 +80,10 @@ MILESTONES = {
     state: "open",
     due_on: Time.parse("July 6, 2016").utc,
   },
+  "v2.2" => {
+    state: "open",
+    due_on: Time.parse("July 20, 2016").utc,
+  },
 }
 
 # Careful! The following teams will be given admin privileges for the repo.
