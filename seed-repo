@@ -35,7 +35,8 @@ LABELS = [
   {:label => 'showstopper', :color => 'e11d21'},
   {:label => 'waiting for ci', :color => '009C36'},
   {:label => 'wontfix', :color => 'ffffff'},
-  {:label => 'generated only', :color => '58B7D6'}
+  {:label => 'generated only', :color => '58B7D6'},
+  {:label => 'upstream issue', :color => 'd4c5f9'}
 ]
 
 # Specify a concrete timezone so dates parse as expected and
