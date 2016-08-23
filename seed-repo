@@ -45,66 +45,68 @@ LABELS = [
 ENV["TZ"] = "America/Denver"
 
 MILESTONES = {
-  "v2.0-beta1" => {
-    state: "closed",
-    due_on: Time.parse("March 25, 2016").utc,
-  },
-  "v2.0-beta2" => {
-    state: "closed",
-    due_on: Time.parse("April 13, 2016").utc,
-  },
-  "v2.0-beta3" => {
-    state: "closed",
-    due_on: Time.parse("April 27, 2016").utc,
-  },
-  "v2.0-beta4" => {
-    state: "closed",
-    due_on: Time.parse("May 11, 2016").utc,
-  },
-  "v2.0-rc1" => {
-    state: "closed",
-    due_on: Time.parse("May 25, 2016").utc,
-  },
-  "v2.0-rc2" => {
-    state: "closed",
-    due_on: Time.parse("June 2, 2016").utc,
-  },
-  "v2.0" => {
-    state: "closed",
-    due_on: Time.parse("June 8, 2016").utc,
-  },
-  "v2.1-pre1" => {
-    state: "closed",
-    due_on: Time.parse("June 22, 2016").utc,
-  },
-  "v2.1" => {
-    state: "closed",
-    due_on: Time.parse("July 6, 2016").utc,
-  },
-  "v2.2" => {
-    state: "closed",
-    due_on: Time.parse("July 20, 2016").utc,
-  },
-  "v2.3" => {
-    state: "closed",
-    due_on: Time.parse("August 3, 2016").utc,
-  },
-  "v2.4" => {
-    state: "closed",
-    due_on: Time.parse("August 17, 2016").utc,
-  },
-  "v2.5" => {
-    state: "open",
-    due_on: Time.parse("August 31, 2016").utc,
-  },
-  "v2.6" => {
-    state: "open",
-    due_on: Time.parse("September 14, 2016").utc,
-  },
-  "v2.7" => {
-    state: "open",
-    due_on: Time.parse("September 28, 2016").utc,
-  },
+  default: {
+    "v2.0-beta1" => {
+      state: "closed",
+      due_on: Time.parse("March 25, 2016").utc,
+    },
+    "v2.0-beta2" => {
+      state: "closed",
+      due_on: Time.parse("April 13, 2016").utc,
+    },
+    "v2.0-beta3" => {
+      state: "closed",
+      due_on: Time.parse("April 27, 2016").utc,
+    },
+    "v2.0-beta4" => {
+      state: "closed",
+      due_on: Time.parse("May 11, 2016").utc,
+    },
+    "v2.0-rc1" => {
+      state: "closed",
+      due_on: Time.parse("May 25, 2016").utc,
+    },
+    "v2.0-rc2" => {
+      state: "closed",
+      due_on: Time.parse("June 2, 2016").utc,
+    },
+    "v2.0" => {
+      state: "closed",
+      due_on: Time.parse("June 8, 2016").utc,
+    },
+    "v2.1-pre1" => {
+      state: "closed",
+      due_on: Time.parse("June 22, 2016").utc,
+    },
+    "v2.1" => {
+      state: "closed",
+      due_on: Time.parse("July 6, 2016").utc,
+    },
+    "v2.2" => {
+      state: "closed",
+      due_on: Time.parse("July 20, 2016").utc,
+    },
+    "v2.3" => {
+      state: "closed",
+      due_on: Time.parse("August 3, 2016").utc,
+    },
+    "v2.4" => {
+      state: "closed",
+      due_on: Time.parse("August 17, 2016").utc,
+    },
+    "v2.5" => {
+      state: "open",
+      due_on: Time.parse("August 31, 2016").utc,
+    },
+    "v2.6" => {
+      state: "open",
+      due_on: Time.parse("September 14, 2016").utc,
+    },
+    "v2.7" => {
+      state: "open",
+      due_on: Time.parse("September 28, 2016").utc,
+    },
+  }
 }
 
 # Careful! The following teams will be given admin privileges for the repo.
@@ -135,7 +137,7 @@ LABELS.each do |l|
 end
 
 milestone_cache = client.milestones(org_repo, state: "all")
-MILESTONES.each do |version, data|
+MILESTONES.fetch(org_repo, MILESTONES[:default]).each do |version, data|
   if milestone = milestone_cache.find { |m| m[:title] == version }
     printf "Updating milestone %s/%d => %s %s\n", version, milestone[:number], data[:state], data[:due_on]
     client.update_milestone(org_repo, milestone[:number], title: version, state: data[:state], due_on: data[:due_on])
