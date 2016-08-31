@@ -36,6 +36,7 @@ REJECT_MATCHES = [
   Regexp.new("^helm-dm$"),
   Regexp.new("^informant$"),
   Regexp.new("^makeself$"),
+  Regexp.new("^megaboom"),
   Regexp.new("^memkv$"),
   Regexp.new("^minio-src$"),
   Regexp.new("^minio-sync$"),
