@@ -22,6 +22,7 @@ repos = client.org_repos(ENV["GITHUB_ORG"] || "deis")
 
 REJECT_MATCHES = [
   Regexp.new("^confd$"),
+  Regexp.new("^cloudfoundry-github-service-broker-ruby$"),
   Regexp.new("^deis$"),
   Regexp.new("^deis\.io$"),
   Regexp.new("^django-fsm$"),
