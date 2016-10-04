@@ -48,10 +48,10 @@ ENV["TZ"] = "America/Denver"
 
 MILESTONES = {
   "deis/steward" => {
-    "Alpha 1" => {
+    "Alpha 2" => {
       state: "open",
     },
-    "Alpha 2" => {
+    "Alpha 3" => {
       state: "open",
     },
   },
