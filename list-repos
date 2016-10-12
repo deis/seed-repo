@@ -21,6 +21,7 @@ client = Octokit::Client.new(access_token: ENV["GITHUB_ACCESS_TOKEN"])
 repos = client.org_repos(ENV["GITHUB_ORG"] || "deis")
 
 REJECT_MATCHES = [
+  Regexp.new("^steward$"),
   Regexp.new("^confd$"),
   Regexp.new("^deis$"),
   Regexp.new("^deis\.io$"),

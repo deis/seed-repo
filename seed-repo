@@ -47,14 +47,6 @@ LABELS = [
 ENV["TZ"] = "America/Denver"
 
 MILESTONES = {
-  "deis/steward" => {
-    "Alpha 2" => {
-      state: "open",
-    },
-    "Alpha 3" => {
-      state: "open",
-    },
-  },
   default: {
     "v2.0-beta1" => {
       state: "closed",
