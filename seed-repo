@@ -113,12 +113,16 @@ MILESTONES = {
       due_on: Time.parse("September 28, 2016").utc,
     },
     "v2.7" => {
-      state: "open",
+      state: "closed",
       due_on: Time.parse("October 12, 2016").utc,
     },
     "v2.8" => {
       state: "open",
       due_on: Time.parse("October 26, 2016").utc,
+    },
+    "v2.9" => {
+      state: "open",
+      due_on: Time.parse("November 9, 2016").utc,
     },
   }
 }
