@@ -28,7 +28,6 @@ REJECT_MATCHES = [
   Regexp.new("^deis\.io$"),
   Regexp.new("^django-fsm$"),
   Regexp.new("^django-polls$"),
-  Regexp.new("^docker-go-dev$"),
   Regexp.new("^docker-go-test$"),
   Regexp.new("^docker-python-dev$"),
   Regexp.new("^docker-registry$"),
