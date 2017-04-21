@@ -35,6 +35,7 @@ WHITELIST_MATCHES = [
   Regexp.new("^dockerbuilder$"),
   Regexp.new("^e2e-runner$"),
   Regexp.new("^fluentd$"),
+  Regexp.new("^jenkins$"),
   Regexp.new("^jenkins-jobs$"),
   Regexp.new("^jenkins-node$"),
   Regexp.new("^k8s-claimer$"),
